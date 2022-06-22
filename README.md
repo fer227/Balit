@@ -1,0 +1,1 @@
+![get](./doc/img/logoBalit.png)
