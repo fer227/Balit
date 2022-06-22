@@ -18,9 +18,10 @@
   },
   "homepage": "https://github.com/fer227/Balit#readme",
   "dependencies": {
+    "@koa/router": "^10.1.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
-    "koa-router": "^10.1.1"
+    "mongoose": "^6.4.0"
   }
 }
