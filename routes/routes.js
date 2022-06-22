@@ -1,6 +1,6 @@
 const Router = require('@koa/router');
 const router = new Router();
-const Controller = require('./Controller.js');
+const Controller = require('../controllers/controller.js');
 
 controller = new Controller();
 
