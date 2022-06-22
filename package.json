@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/fer227/Balit/issues"
   },
-  "homepage": "https://github.com/fer227/Balit#readme"
+  "homepage": "https://github.com/fer227/Balit#readme",
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^10.1.1"
+  }
 }
