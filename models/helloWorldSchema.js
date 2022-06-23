@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 
 const HelloWorldSChema = new mongoose.Schema(
 {
-        test : {
+        key : {
+            type:String,
+            trim:true,
+            required:true,
+            max:164
+        },
+        value : {
             type:String,
             trim:true,
             required:true,

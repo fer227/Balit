@@ -10,17 +10,8 @@ var port = process.env.PORT;
 var server = null;
 
 // Mongoose connection to database
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useFindAndModify: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    autoCreate : true,
-    setDefaultsOnInsert: true
-})
-.then(() => {console.log("DB connected");
-
+mongoose.connect(process.env.MONGO_URI, ).then(() => {
+    console.log("DB connected");
 })
 .catch((err)=> console.error("DB connection errror", err));
 
