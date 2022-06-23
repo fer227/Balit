@@ -2,32 +2,27 @@ const HelloWorldSchema = require('../models/helloWorldSchema')
 
 class Controller{
     // Find in DB test
-    helloWorldGet(ctx){
-        HelloWorldSchema.find({ title: 'Hello'}, function (err, docs) {
-            if(err){
-                console.log(err)
-                ctx.status = 400
-                ctx.body = {msg: err}
-            }
+    async helloWorldGet(ctx){
+        await HelloWorldSchema.find({ key: 'Hello'}).exec().then((result) => {
             ctx.status = 200
-            ctx.body = {msg: 'Data found', key: docs[0].key, value: docs[0].value}
-        });
+            ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error getting object ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
+        })
     }
 
     // Create in DB test
-    helloWorldPost(){
+    async helloWorldPost(ctx){
         let newHelloWorld = new HelloWorldSchema({key:'Hello', value:'World'})
-        await newHelloWorld.save().then(function (err, data){
-            if(err){
-                console.log(err)
-                // ctx.status = 400
-                // ctx.body = {msg: err}
-                // return ctx
-            }
-            return {
-                'status': 200,
-                'data': data
-            }
+        await newHelloWorld.save().then((result) => {
+            ctx.status = 201
+            ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error saving object ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
         })
     }
 }

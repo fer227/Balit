@@ -4,17 +4,12 @@ const Controller = require('../controllers/controller.js');
 
 controller = new Controller();
 
-router.get('/helloworld', (ctx) => {
-    ctx = controller.helloWorldGet(ctx)
+router.get('/helloworld', async (ctx) => {
+    await controller.helloWorldGet(ctx)
 });
 
-router.post('/helloworld', (ctx) => {
-    console.log('entra')
-    res = controller.helloWorldPost(ctx)
-    console.log(res)
-    ctx.status = res.status
-    ctx.body = res.data
-    console.log('sale')
+router.post('/helloworld', async (ctx) => {
+    await controller.helloWorldPost(ctx)
 });
 
 module.exports = router;
