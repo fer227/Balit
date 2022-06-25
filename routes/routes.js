@@ -36,4 +36,16 @@ router.get('/lineas', async (ctx) => {
     await controller.getLineas(ctx)
 });
 
+router.post('/puntosdeinteres', async (ctx) => {
+    await controller.newPuntoDeInteres(ctx)
+});
+
+router.get('/puntosdeinteres/:id', async (ctx) => {
+    await controller.getPuntoDeInteres(ctx, ctx.params.id)
+});
+
+router.get('/puntosdeinteres', async (ctx) => {
+    await controller.getPuntosDeInteres(ctx)
+});
+
 module.exports = router;

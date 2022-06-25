@@ -1,6 +1,7 @@
 // const HelloWorldSchema = require('../models/helloWorldSchema')
 const ParadaSchema = require('../models/paradaSchema')
 const LineaSchema = require('../models/lineaSchema')
+const PuntoDeInteresSchema = require('../models/puntoDeInteresSchema')
 
 class Controller{
     // Find in DB test
@@ -54,6 +55,41 @@ class Controller{
 
     async getLineas(ctx){
         await LineaSchema.find({}).exec().then((result) => {
+            ctx.status = 200
+            ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
+        })
+    }
+
+    async newPuntoDeInteres(ctx){
+        let body = ctx.request.body
+        let newPuntoDeInteres = new LineaSchema({nombre:body.nombre, direccion:body.direccion, descripcion:body.descripcion})
+        await newPuntoDeInteres.save().then((result) => {
+            ctx.status = 201
+            ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error saving object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
+        })
+    }
+
+    async getPuntoDeInteres(ctx, id){
+        await PuntoDeInteres.find({_id: id}).exec().then((result) => {
+            ctx.status = 200
+            ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
+        })
+    }
+
+    async getPuntoDeInteres(ctx){
+        await PuntoDeInteres.find({}).exec().then((result) => {
             ctx.status = 200
             ctx.body = result
         }).catch((errorSave)=>{
