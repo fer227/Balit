@@ -22,7 +22,7 @@ const LineaSchema = new mongoose.Schema(
             max: 23
         },
         paradas : [{
-            nombreLinea: String,
+            numeroParada: String,
             orden: Number
         }]
 

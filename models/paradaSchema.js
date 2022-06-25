@@ -21,7 +21,7 @@ const ParadaSchema = new mongoose.Schema(
             required:true,
         },
         conexiones : [{
-            numeroParada: Number
+            nombreLinea: Number
         }]
 
 }, {timestamps: true});
