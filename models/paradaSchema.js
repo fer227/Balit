@@ -23,7 +23,7 @@ const ParadaSchema = new mongoose.Schema(
         conexiones : [{
             nombreLinea: Number
         }],
-        PoI : [{
+        puntosDeInteres : [{
             idPoI: mongoose.ObjectId
         }],
 

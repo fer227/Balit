@@ -4,12 +4,24 @@ const Controller = require('../controllers/controller.js');
 
 controller = new Controller();
 
-router.get('/helloworld', async (ctx) => {
-    await controller.helloWorldGet(ctx)
+// router.get('/helloworld', async (ctx) => {
+//     await controller.helloWorldGet(ctx)
+// });
+
+// router.post('/helloworld', async (ctx) => {
+//     await controller.helloWorldPost(ctx)
+// });
+
+router.post('/paradas', async (ctx) => {
+    await controller.newParada(ctx)
 });
 
-router.post('/helloworld', async (ctx) => {
-    await controller.helloWorldPost(ctx)
+router.get('/paradas/:id', async (ctx) => {
+    await controller.getParada(ctx, ctx.params.id)
+});
+
+router.get('/paradas', async (ctx) => {
+    await controller.getParadas(ctx)
 });
 
 module.exports = router;
