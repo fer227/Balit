@@ -22,7 +22,10 @@ const ParadaSchema = new mongoose.Schema(
         },
         conexiones : [{
             nombreLinea: Number
-        }]
+        }],
+        PoI : [{
+            idPoI: mongoose.ObjectId
+        }],
 
 }, {timestamps: true});
 
