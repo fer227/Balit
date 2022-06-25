@@ -123,10 +123,38 @@ class Controller{
         })
     }
 
-    async getParadas(ctx, id){
+    async getParadas(ctx){
         await ParadaSchema.find({}).exec().then((result) => {
             ctx.status = 200
             ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
+        })
+    }
+
+    async getParadasByLinea(ctx, id){
+        // First get Linea
+        await LineaSchema.find({nombre: id}).exec().then((resultLinea) => {
+            numeroParadas = []
+            for(const parada of resultLinea.paradas){
+                numeroParadas.push(parada.numeroParada)
+            }
+
+            // Get related paradas
+            await ParadaSchema.find().where('numero').in(numeroParadas).exec().then((resultParada) => {
+                response = {}
+                response['orden'] = resultLinea.paradas
+                response['infoParadas'] = resultParada
+                ctx.status = 200
+                ctx.body = response
+            }).catch((errorSave)=>{
+                console.error(`Error getting object. Error: ${errorSave}`)
+                ctx.status = 404
+                ctx.body = result
+            })
+
         }).catch((errorSave)=>{
             console.error(`Error getting object. Error: ${errorSave}`)
             ctx.status = 404

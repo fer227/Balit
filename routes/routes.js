@@ -32,6 +32,10 @@ router.get('/lineas/:id', async (ctx) => {
     await controller.getLinea(ctx, ctx.params.id)
 });
 
+router.get('/lineas/paradas/:id', async (ctx) => {
+    await controller.getParadasByLinea(ctx, ctx.params.id)
+});
+
 router.get('/lineas', async (ctx) => {
     await controller.getLineas(ctx)
 });
