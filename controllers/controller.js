@@ -161,6 +161,30 @@ class Controller{
             ctx.body = result
         })
     }
+
+    async getPuntosDeInteresByParada(ctx, id){
+        // First get Parada
+        await ParadaSchema.find({numero: id}).exec().then((resultParada) => {
+            idPoIs = []
+            for(const poi of resultParada.puntosDeInteres){
+                idPoIs.push(poi.idPoI)
+            }
+
+            await PuntoDeInteresSchema.find().where('_id').in(idPoIs).exec().then((resultPOIS) => {
+                ctx.status = 200
+                ctx.body = resultPOIS
+            }).catch((errorSave)=>{
+                console.error(`Error getting object. Error: ${errorSave}`)
+                ctx.status = 404
+                ctx.body = result
+            })
+
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = result
+        })
+    }
 }
 
 module.exports = Controller

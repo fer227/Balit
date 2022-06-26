@@ -24,16 +24,16 @@ router.get('/paradas', async (ctx) => {
     await controller.getParadas(ctx)
 });
 
+router.get('/paradas/linea/:id', async (ctx) => {
+    await controller.getParadasByLinea(ctx, ctx.params.id)
+});
+
 router.post('/lineas', async (ctx) => {
     await controller.newLinea(ctx)
 });
 
 router.get('/lineas/:id', async (ctx) => {
     await controller.getLinea(ctx, ctx.params.id)
-});
-
-router.get('/lineas/paradas/:id', async (ctx) => {
-    await controller.getParadasByLinea(ctx, ctx.params.id)
 });
 
 router.get('/lineas', async (ctx) => {
@@ -50,6 +50,10 @@ router.get('/puntosdeinteres/:id', async (ctx) => {
 
 router.get('/puntosdeinteres', async (ctx) => {
     await controller.getPuntosDeInteres(ctx)
+});
+
+router.get('/puntosdeinteres/parada/:id', async (ctx) => {
+    await controller.getPuntosDeInteresByParada(ctx, ctx.params.id)
 });
 
 module.exports = router;
