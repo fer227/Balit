@@ -3,6 +3,7 @@ const ParadaSchema = require('../models/paradaSchema')
 const LineaSchema = require('../models/lineaSchema')
 const PuntoDeInteresSchema = require('../models/puntoDeInteresSchema')
 const puntoDeInteresSchema = require('../models/puntoDeInteresSchema')
+const mongoose = require('mongoose');
 
 class Controller{
     // Find in DB test
@@ -138,7 +139,7 @@ class Controller{
     async getParadasByLinea(ctx, id){
         // First get Linea
         await LineaSchema.find({nombre: id}).exec().then(async (resultLinea) => {
-            numeroParadas = []
+            let numeroParadas = []
             for(const parada of resultLinea.paradas){
                 numeroParadas.push(parada.numeroParada)
             }
@@ -165,22 +166,21 @@ class Controller{
 
     async getPuntosDeInteresByParada(ctx, id){
         // First get Parada
-        await ParadaSchema.find({numero: id}).exec().then(async (resultParada) => {
-            idPoIs = []
-            for(const poi of resultParada.puntosDeInteres){
-                idPoIs.push(poi.idPoI)
-            }
-
-            // Get related POIs
-            await PuntoDeInteresSchema.find().where('_id').in(idPoIs).exec().then((resultPOIS) => {
-                ctx.status = 200
-                ctx.body = resultPOIS
-            }).catch((errorSave)=>{
-                console.error(`Error getting object. Error: ${errorSave}`)
-                ctx.status = 404
-                ctx.body = errorSave
+        let idPoIs = []
+        await ParadaSchema.findOne({numero: id}).exec().then(async (resultParada) => {
+            resultParada.puntosDeInteres.forEach(function(poi){
+                idPoIs.push(poi._id.toString())
             })
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = errorSave
+        })
 
+        // Get related POIs
+        await PuntoDeInteresSchema.find().where('_id').in(idPoIs).exec().then((resultPOIS) => {
+            ctx.status = 200
+            ctx.body = resultPOIS
         }).catch((errorSave)=>{
             console.error(`Error getting object. Error: ${errorSave}`)
             ctx.status = 404
@@ -199,34 +199,42 @@ class Controller{
         const pois = [poiJuventud, poiCatedral, poiPaseo, poiCiencias, poiEstacion]
         let poiIdByName = {}
 
-        // Insert pois and save the id for later
-        pois.forEach(async function(poi){
+        for (const poi of pois){
             await poi.save().then((result) => {
-                poiIdByName[poi.nombre] = result.id
+                poiIdByName[poi.nombre] = result._id.toString()
             }).catch((errorSave)=>{
                 console.error(`Error saving object. Error: ${errorSave}`)
                 ctx.status = 404
                 ctx.body = errorSave
             })
-        })
+        }
 
         // paradas
-        let p1 = new ParadaSchema({nombre: 'Estadio de la Juventud', numero: 100, latitud: 37.1, longitud: 36.7, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: '5'}], puntosDeInteres: [{idPoi: poiIdByName['Estadio de la Juventud']}]})
-        let p2 = new ParadaSchema({nombre: 'Catedral', numero: 200, latitud: 37.4, longitud: 36.5, conexiones: [{nombreLinea: 'C4'}, {nombreLinea: '5'}], puntosDeInteres: [{idPoi: poiIdByName['Catedral']}]})
-        let p3 = new ParadaSchema({nombre: 'Paseo de los Tristes', numero: 300, latitud: 37.3, longitud: 36.2, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: '5'}], puntosDeInteres: [{idPoi: poiIdByName['Paseo de los Tristes']}]})
-        let p4 = new ParadaSchema({nombre: 'Parque de las Ciencias', numero: 400, latitud: 37.8, longitud: 36.8, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: 'C4'}], puntosDeInteres: [{idPoi: poiIdByName['Parque de las Ciencias']}]})
-        let p5 = new ParadaSchema({nombre: 'Estación de autobuses', numero: 500, latitud: 37.8, longitud: 36.3, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: 'C4'}], puntosDeInteres: [{idPoi: poiIdByName['Estación de autobuses']}]})
+        let p1 = new ParadaSchema({nombre: 'Estadio de la Juventud', numero: 100, latitud: 37.1, longitud: 36.7, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: '5'}], puntosDeInteres: [poiIdByName['Estadio de la Juventud']]})
+        let p2 = new ParadaSchema({nombre: 'Catedral', numero: 200, latitud: 37.4, longitud: 36.5, conexiones: [{nombreLinea: 'C4'}, {nombreLinea: '5'}], puntosDeInteres: [poiIdByName['Catedral']]})
+        let p3 = new ParadaSchema({nombre: 'Paseo de los Tristes', numero: 300, latitud: 37.3, longitud: 36.2, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: '5'}], puntosDeInteres: [poiIdByName['Paseo de los Tristes']]})
+        let p4 = new ParadaSchema({nombre: 'Parque de las Ciencias', numero: 400, latitud: 37.8, longitud: 36.8, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: 'C4'}], puntosDeInteres: [poiIdByName['Parque de las Ciencias']]})
+        let p5 = new ParadaSchema({nombre: 'Estación de autobuses', numero: 500, latitud: 37.8, longitud: 36.3, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: 'C4'}], puntosDeInteres: [poiIdByName['Estación de autobuses']]})
     
-        const paradas = [p1, p2, p3, p4, p5]
-        paradas.forEach(async function(parada){
+        const paradas = [p1,p2,p3,p4,p5]
+        for (const parada of paradas){
             await parada.save().then((result) => {
             }).catch((errorSave)=>{
                 console.error(`Error saving object. Error: ${errorSave}`)
                 ctx.status = 404
                 ctx.body = errorSave
             })
-        })
+        }
+        // paradas.forEach(async function(parada){
+        //     await parada.save().then((result) => {
+        //     }).catch((errorSave)=>{
+        //         console.error(`Error saving object. Error: ${errorSave}`)
+        //         ctx.status = 404
+        //         ctx.body = errorSave
+        //     })
+        // })
 
+        // líneas
         let n3 = new LineaSchema({nombre: 'N3', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 300, orden: 2}, {numeroParada: 400, orden: 3}, {numeroParada: 500, orden: 4}]})
         let c4 = new LineaSchema({nombre: 'C4', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 200, orden: 1}, {numeroParada: 400, orden: 2}, {numeroParada: 500, orden: 3}]})
         let x5 = new LineaSchema({nombre: '5', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 200, orden: 2}, {numeroParada: 300, orden: 3}]})

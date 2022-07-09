@@ -24,7 +24,8 @@ const ParadaSchema = new mongoose.Schema(
             nombreLinea: String
         }],
         puntosDeInteres : [{
-            idPoI: mongoose.ObjectId
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'PuntoDeInteres'
         }],
 
 }, {timestamps: true});
