@@ -56,4 +56,8 @@ router.get('/puntosdeinteres/parada/:id', async (ctx) => {
     await controller.getPuntosDeInteresByParada(ctx, ctx.params.id)
 });
 
+router.post('/initializeDB', async (ctx) => {
+    await controller.initializeDB(ctx)
+});
+
 module.exports = router;
