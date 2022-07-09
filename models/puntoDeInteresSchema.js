@@ -15,8 +15,7 @@ const PuntoDeInteresSchema = new mongoose.Schema(
         },
         descripcion : {
             type:String,
-            trim:true,
-            required:true
+            trim:true
         }
 }, {timestamps: true});
 
