@@ -39,7 +39,7 @@ class Controller{
             ctx.body = result
         }).catch((errorSave)=>{
             console.error(`Error saving object. Error: ${errorSave}`)
-            ctx.status = 404
+            ctx.status = 400
             ctx.body = errorSave
         })
     }
@@ -74,7 +74,7 @@ class Controller{
             ctx.body = result
         }).catch((errorSave)=>{
             console.error(`Error saving object. Error: ${errorSave}`)
-            ctx.status = 404
+            ctx.status = 400
             ctx.body = errorSave
         })
     }
@@ -109,7 +109,7 @@ class Controller{
             ctx.body = result
         }).catch((errorSave)=>{
             console.error(`Error saving object. Error: ${errorSave}`)
-            ctx.status = 404
+            ctx.status = 400
             ctx.body = errorSave
         })
     }
@@ -216,7 +216,7 @@ class Controller{
                 poiIdByName[poi.nombre] = result._id.toString()
             }).catch((errorSave)=>{
                 console.error(`Error saving object. Error: ${errorSave}`)
-                ctx.status = 404
+                ctx.status = 400
                 ctx.body = errorSave
             })
         }
@@ -233,7 +233,7 @@ class Controller{
             await parada.save().then((result) => {
             }).catch((errorSave)=>{
                 console.error(`Error saving object. Error: ${errorSave}`)
-                ctx.status = 404
+                ctx.status = 400
                 ctx.body = errorSave
             })
         }
@@ -248,7 +248,7 @@ class Controller{
             await linea.save().then((result) => {
             }).catch((errorSave)=>{
                 console.error(`Error saving object. Error: ${errorSave}`)
-                ctx.status = 404
+                ctx.status = 400
                 ctx.body = errorSave
             })
         })
