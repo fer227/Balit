@@ -45,7 +45,7 @@ class Controller{
     }
 
     async getLinea(ctx, id){
-        await LineaSchema.find({nombre: id}).exec().then((result) => {
+        await LineaSchema.findOne({nombre: id}).exec().then((result) => {
             ctx.status = 200
             ctx.body = result
         }).catch((errorSave)=>{
@@ -80,7 +80,7 @@ class Controller{
     }
 
     async getPuntoDeInteres(ctx, id){
-        await PuntoDeInteres.find({_id: id}).exec().then((result) => {
+        await puntoDeInteresSchema.findOne({_id: id}).exec().then((result) => {
             ctx.status = 200
             ctx.body = result
         }).catch((errorSave)=>{
@@ -90,8 +90,8 @@ class Controller{
         })
     }
 
-    async getPuntoDeInteres(ctx){
-        await PuntoDeInteres.find({}).exec().then((result) => {
+    async getPuntosDeInteres(ctx){
+        await puntoDeInteresSchema.find({}).exec().then((result) => {
             ctx.status = 200
             ctx.body = result
         }).catch((errorSave)=>{
@@ -115,7 +115,7 @@ class Controller{
     }
 
     async getParada(ctx, id){
-        await ParadaSchema.find({numero: id}).exec().then((result) => {
+        await ParadaSchema.findOne({numero: id}).exec().then((result) => {
             ctx.status = 200
             ctx.body = result
         }).catch((errorSave)=>{
@@ -136,27 +136,39 @@ class Controller{
         })
     }
 
+    async getPuntosDeInteres(ctx){
+        await PuntoDeInteresSchema.find({}).exec().then((result) => {
+            ctx.status = 200
+            ctx.body = result
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = errorSave
+        })
+    }
+
     async getParadasByLinea(ctx, id){
         // First get Linea
-        await LineaSchema.find({nombre: id}).exec().then(async (resultLinea) => {
-            let numeroParadas = []
-            for(const parada of resultLinea.paradas){
+        let numeroParadas = []
+        let orden
+        await LineaSchema.findOne({nombre: id}).exec().then(async (resultLinea) => {
+            resultLinea.paradas.forEach(function(parada){
                 numeroParadas.push(parada.numeroParada)
-            }
-
-            // Get related paradas
-            await ParadaSchema.find().where('numero').in(numeroParadas).exec().then((resultParada) => {
-                response = {}
-                response['orden'] = resultLinea.paradas
-                response['infoParadas'] = resultParada
-                ctx.status = 200
-                ctx.body = response
-            }).catch((errorSave)=>{
-                console.error(`Error getting object. Error: ${errorSave}`)
-                ctx.status = 404
-                ctx.body = errorSave
             })
+            orden = resultLinea.paradas
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = errorSave
+        })
 
+        // Get related paradas
+        await ParadaSchema.find().where('numero').in(numeroParadas).exec().then((resultParada) => {
+            let response = {}
+            response['orden'] = orden
+            response['infoParadas'] = resultParada
+            ctx.status = 200
+            ctx.body = response
         }).catch((errorSave)=>{
             console.error(`Error getting object. Error: ${errorSave}`)
             ctx.status = 404
@@ -225,14 +237,6 @@ class Controller{
                 ctx.body = errorSave
             })
         }
-        // paradas.forEach(async function(parada){
-        //     await parada.save().then((result) => {
-        //     }).catch((errorSave)=>{
-        //         console.error(`Error saving object. Error: ${errorSave}`)
-        //         ctx.status = 404
-        //         ctx.body = errorSave
-        //     })
-        // })
 
         // líneas
         let n3 = new LineaSchema({nombre: 'N3', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 300, orden: 2}, {numeroParada: 400, orden: 3}, {numeroParada: 500, orden: 4}]})
