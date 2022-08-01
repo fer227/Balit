@@ -239,9 +239,9 @@ class Controller{
         }
 
         // líneas
-        let n3 = new LineaSchema({nombre: 'N3', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 300, orden: 2}, {numeroParada: 400, orden: 3}, {numeroParada: 500, orden: 4}]})
-        let c4 = new LineaSchema({nombre: 'C4', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 200, orden: 1}, {numeroParada: 400, orden: 2}, {numeroParada: 500, orden: 3}]})
-        let x5 = new LineaSchema({nombre: '5', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 200, orden: 2}, {numeroParada: 300, orden: 3}]})
+        let n3 = new LineaSchema({nombre: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo',  horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 300, orden: 2}, {numeroParada: 400, orden: 3}, {numeroParada: 500, orden: 4}]})
+        let c4 = new LineaSchema({nombre: 'C4', descripcion: 'Chana- Zaidín', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 200, orden: 1}, {numeroParada: 400, orden: 2}, {numeroParada: 500, orden: 3}]})
+        let x5 = new LineaSchema({nombre: '5', descripcion: 'Beethoven- Parque Nueva Granada', horaSalida: 8, horaCierre: 23, paradas: [{numeroParada: 100, orden: 1}, {numeroParada: 200, orden: 2}, {numeroParada: 300, orden: 3}]})
 
         const lineas = [n3, c4, x5]
         lineas.forEach(async function(linea){

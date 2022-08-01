@@ -9,6 +9,11 @@ const LineaSchema = new mongoose.Schema(
             required:true,
             unique:true
         },
+        descripcion : {
+            type:String,
+            trim:true,
+            required:true
+        },
         horaSalida : {
             type:Number,
             required:true,
