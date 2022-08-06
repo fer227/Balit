@@ -202,11 +202,11 @@ class Controller{
 
     async initializeDB(ctx){
         // pois
-        let poiJuventud = new PuntoDeInteresSchema({nombre:'Estadio de la Juventud', direccion: 'C. Albondón 2, Granada', descripcion:'Recinto para eventos y todo tipo de deportes'})
-        let poiCatedral = new PuntoDeInteresSchema({nombre:'Catedral', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:''})
-        let poiPaseo = new PuntoDeInteresSchema({nombre:'Paseo de los Tristes', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Pequeña ruta con vistas a la Alhambra'})
-        let poiCiencias = new PuntoDeInteresSchema({nombre:'Parque de las Ciencias', direccion: 'Av. de la Ciencia', descripcion:'Museo interactivo de ciencia'})
-        let poiEstacion = new PuntoDeInteresSchema({nombre:'Estación de autobuses', direccion: 'Av. Juan Pablo II ', descripcion:''})
+        let poiJuventud = new PuntoDeInteresSchema({nombre:'Estadio de la Juventud', direccion: 'C. Albondón 2, Granada', descripcion:'Recinto para eventos y todo tipo de deportes.', tags: ['Deporte']})
+        let poiCatedral = new PuntoDeInteresSchema({nombre:'Catedral', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Iglesia del s. XVI situada en el centro urbano. La Catedral de Granada combina los estilos gótico, renacentista y barroco. Junto a la catedral se encuentra la Capilla Real, la capilla funerariade los reyes.', tags: ['Cultura']})
+        let poiPaseo = new PuntoDeInteresSchema({nombre:'Paseo de los Tristes', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Pequeña ruta con vistas a la Alhambra.', tags: ['Paisaje']})
+        let poiCiencias = new PuntoDeInteresSchema({nombre:'Parque de las Ciencias', direccion: 'Av. de la Ciencia', descripcion:'Museo interactivo de ciencia.', tags: ['Cultura']})
+        let poiEstacion = new PuntoDeInteresSchema({nombre:'Estación de autobuses', direccion: 'Av. Juan Pablo II ', descripcion:'Estación principal de autobuses de la ciudad de Granada.', tags: ['Servicios']})
 
         const pois = [poiJuventud, poiCatedral, poiPaseo, poiCiencias, poiEstacion]
         let poiIdByName = {}
@@ -226,7 +226,7 @@ class Controller{
         let p2 = new ParadaSchema({nombre: 'Catedral', numero: 200, latitud: 37.4, longitud: 36.5, conexiones: [{nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}, {nombreLinea: '5', descripcion: 'Beethoven- Parque Nueva Granada'}], puntosDeInteres: [poiIdByName['Catedral']]})
         let p3 = new ParadaSchema({nombre: 'Paseo de los Tristes', numero: 300, latitud: 37.3, longitud: 36.2, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: '5', descripcion: 'Beethoven- Parque Nueva Granada'}], puntosDeInteres: [poiIdByName['Paseo de los Tristes']]})
         let p4 = new ParadaSchema({nombre: 'Parque de las Ciencias', numero: 400, latitud: 37.8, longitud: 36.8, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}], puntosDeInteres: [poiIdByName['Parque de las Ciencias']]})
-        let p5 = new ParadaSchema({nombre: 'Estación de autobuses', numero: 500, latitud: 37.8, longitud: 36.3, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}], puntosDeInteres: [poiIdByName['Estación de autobuses']]})
+        let p5 = new ParadaSchema({nombre: 'Estación de autobuses', numero: 500, latitud: 37.8, longitud: 36.3, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}], puntosDeInteres: [poiIdByName['Estación de autobuses'], poiIdByName['Catedral']]})
     
         const paradas = [p1,p2,p3,p4,p5]
         for (const parada of paradas){
