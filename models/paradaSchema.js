@@ -21,7 +21,8 @@ const ParadaSchema = new mongoose.Schema(
             required:true,
         },
         conexiones : [{
-            nombreLinea: String
+            nombreLinea: String,
+            descripcion: String
         }],
         puntosDeInteres : [{
             type: mongoose.Schema.Types.ObjectId,

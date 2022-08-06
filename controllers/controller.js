@@ -222,11 +222,11 @@ class Controller{
         }
 
         // paradas
-        let p1 = new ParadaSchema({nombre: 'Estadio de la Juventud', numero: 100, latitud: 37.1, longitud: 36.7, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: '5'}], puntosDeInteres: [poiIdByName['Estadio de la Juventud']]})
-        let p2 = new ParadaSchema({nombre: 'Catedral', numero: 200, latitud: 37.4, longitud: 36.5, conexiones: [{nombreLinea: 'C4'}, {nombreLinea: '5'}], puntosDeInteres: [poiIdByName['Catedral']]})
-        let p3 = new ParadaSchema({nombre: 'Paseo de los Tristes', numero: 300, latitud: 37.3, longitud: 36.2, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: '5'}], puntosDeInteres: [poiIdByName['Paseo de los Tristes']]})
-        let p4 = new ParadaSchema({nombre: 'Parque de las Ciencias', numero: 400, latitud: 37.8, longitud: 36.8, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: 'C4'}], puntosDeInteres: [poiIdByName['Parque de las Ciencias']]})
-        let p5 = new ParadaSchema({nombre: 'Estación de autobuses', numero: 500, latitud: 37.8, longitud: 36.3, conexiones: [{nombreLinea: 'N3'}, {nombreLinea: 'C4'}], puntosDeInteres: [poiIdByName['Estación de autobuses']]})
+        let p1 = new ParadaSchema({nombre: 'Estadio de la Juventud', numero: 100, latitud: 37.1, longitud: 36.7, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: '5', descripcion: 'Beethoven- Parque Nueva Granada'}], puntosDeInteres: [poiIdByName['Estadio de la Juventud']]})
+        let p2 = new ParadaSchema({nombre: 'Catedral', numero: 200, latitud: 37.4, longitud: 36.5, conexiones: [{nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}, {nombreLinea: '5', descripcion: 'Beethoven- Parque Nueva Granada'}], puntosDeInteres: [poiIdByName['Catedral']]})
+        let p3 = new ParadaSchema({nombre: 'Paseo de los Tristes', numero: 300, latitud: 37.3, longitud: 36.2, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: '5', descripcion: 'Beethoven- Parque Nueva Granada'}], puntosDeInteres: [poiIdByName['Paseo de los Tristes']]})
+        let p4 = new ParadaSchema({nombre: 'Parque de las Ciencias', numero: 400, latitud: 37.8, longitud: 36.8, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}], puntosDeInteres: [poiIdByName['Parque de las Ciencias']]})
+        let p5 = new ParadaSchema({nombre: 'Estación de autobuses', numero: 500, latitud: 37.8, longitud: 36.3, conexiones: [{nombreLinea: 'N3', descripcion: 'Cerrillo de Maracena- Triunfo'}, {nombreLinea: 'C4', descripcion: 'Chana- Zaidín'}], puntosDeInteres: [poiIdByName['Estación de autobuses']]})
     
         const paradas = [p1,p2,p3,p4,p5]
         for (const parada of paradas){
