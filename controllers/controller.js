@@ -176,6 +176,32 @@ class Controller{
         })
     }
 
+    async getPuntosDeInteresByLinea(ctx, ids){
+        // First get Parada
+        let idPoIs = []
+        await ParadaSchema.find().where('numero').in(ids).exec().then(async (resultParadas) => {
+            resultParadas.forEach(function(parada){
+                parada.puntosDeInteres.forEach(function(poi){
+                    idPoIs.push(poi._id.toString())
+                })
+            })
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = errorSave
+        })
+
+        // Get related POIs
+        await PuntoDeInteresSchema.find().where('_id').in(idPoIs).exec().then((resultPOIS) => {
+            ctx.status = 200
+            ctx.body = resultPOIS
+        }).catch((errorSave)=>{
+            console.error(`Error getting object. Error: ${errorSave}`)
+            ctx.status = 404
+            ctx.body = errorSave
+        })
+    }
+
     async getPuntosDeInteresByParada(ctx, id){
         // First get Parada
         let idPoIs = []
