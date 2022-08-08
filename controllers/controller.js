@@ -228,11 +228,11 @@ class Controller{
 
     async initializeDB(ctx){
         // pois
-        let poiJuventud = new PuntoDeInteresSchema({nombre:'Estadio de la Juventud', direccion: 'C. Albondón 2, Granada', descripcion:'Recinto para eventos y todo tipo de deportes.', tags: ['Deporte']})
-        let poiCatedral = new PuntoDeInteresSchema({nombre:'Catedral', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Iglesia del s. XVI situada en el centro urbano. La Catedral de Granada combina los estilos gótico, renacentista y barroco. Junto a la catedral se encuentra la Capilla Real, la capilla funerariade los reyes.', tags: ['Cultura']})
-        let poiPaseo = new PuntoDeInteresSchema({nombre:'Paseo de los Tristes', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Pequeña ruta con vistas a la Alhambra.', tags: ['Paisaje']})
-        let poiCiencias = new PuntoDeInteresSchema({nombre:'Parque de las Ciencias', direccion: 'Av. de la Ciencia', descripcion:'Museo interactivo de ciencia.', tags: ['Cultura']})
-        let poiEstacion = new PuntoDeInteresSchema({nombre:'Estación de autobuses', direccion: 'Av. Juan Pablo II ', descripcion:'Estación principal de autobuses de la ciudad de Granada.', tags: ['Servicios']})
+        let poiJuventud = new PuntoDeInteresSchema({nombre:'Estadio de la Juventud', direccion: 'C. Albondón 2, Granada', descripcion:'Recinto para eventos y todo tipo de deportes.', tags: ['Deporte', 'Ocio']})
+        let poiCatedral = new PuntoDeInteresSchema({nombre:'Catedral', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Iglesia del s. XVI situada en el centro urbano. La Catedral de Granada combina los estilos gótico, renacentista y barroco. Junto a la catedral se encuentra la Capilla Real, la capilla funerariade los reyes.', tags: ['Cultura', 'Arquitectura']})
+        let poiPaseo = new PuntoDeInteresSchema({nombre:'Paseo de los Tristes', direccion: 'C. Gran Vía de Colón, 5, Granada', descripcion:'Pequeña ruta con vistas a la Alhambra.', tags: ['Paisaje', 'Gastronomía']})
+        let poiCiencias = new PuntoDeInteresSchema({nombre:'Parque de las Ciencias', direccion: 'Av. de la Ciencia', descripcion:'Museo interactivo de ciencia.', tags: ['Cultura', 'Ocio', 'Educación']})
+        let poiEstacion = new PuntoDeInteresSchema({nombre:'Estación de autobuses', direccion: 'Av. Juan Pablo II ', descripcion:'Estación principal de autobuses de la ciudad de Granada.', tags: ['Servicios', 'Transporte']})
 
         const pois = [poiJuventud, poiCatedral, poiPaseo, poiCiencias, poiEstacion]
         let poiIdByName = {}
