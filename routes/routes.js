@@ -56,7 +56,7 @@ router.get('/puntosdeinteres/parada/:id', async (ctx) => {
     await controller.getPuntosDeInteresByParada(ctx, ctx.params.id)
 });
 
-router.get('/puntosdeinteres/linea/query', async (ctx) => {
+router.get('/puntosdeinteres/linea/paradas', async (ctx) => {
     await controller.getPuntosDeInteresByLinea(ctx, ctx.query.id)
 });
 
