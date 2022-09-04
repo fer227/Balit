@@ -4,6 +4,8 @@ Balit consiste en un proyecto software orientado a dar soporte sobre la informac
 
 Uno de los principales objetivos de este proyecto es la accesibilidad. Pretendemos que nuestra aplicación sea usable para cualquier tipo de usuario que se lo proponga o que incluso, necesite de una herramienta para poder utilizar el transporte público.
 
+Otros objetivos también incluyen utilizar tecnologías IoT para detectar y guiar de forma más precisa al usuario, así como utilizar tecnologías Cloud.
+
 En este repositorio se encuentra lo relacionado puramente con el desarrollo del back-end y el despliegue. En la arquitectura de la propuesta de este sistema, decidimos utilizar microservicios y por el momento, hemos desarrollado lo relacionado con el Shipping Microservice cuyo principal cometido es servir la información de las líneas, paradas y puntos de interés.
 
 ![get](./doc/img/arquitectura.png)
